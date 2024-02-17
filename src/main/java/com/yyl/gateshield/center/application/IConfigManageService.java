@@ -1,5 +1,6 @@
 package com.yyl.gateshield.center.application;
 
+import com.yyl.gateshield.center.domain.manage.model.aggregates.ApplicationSystemRichInfo;
 import com.yyl.gateshield.center.domain.manage.model.vo.GatewayServerVO;
 
 import java.util.List;
@@ -13,4 +14,5 @@ public interface IConfigManageService {
 
     boolean registerGatewayServerNode(String groupId, String gatewayId, String gatewayName, String gatewayAddress);
 
+    ApplicationSystemRichInfo queryApplicationSystemRichInfo(String gatewayId);
 }

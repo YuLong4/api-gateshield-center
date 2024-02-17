@@ -3,6 +3,7 @@ package com.yyl.gateshield.center.test;
 import com.alibaba.fastjson.JSON;
 import com.yyl.gateshield.center.application.IConfigManageService;
 import com.yyl.gateshield.center.application.IRegisterManageService;
+import com.yyl.gateshield.center.domain.manage.model.aggregates.ApplicationSystemRichInfo;
 import com.yyl.gateshield.center.domain.manage.model.vo.GatewayServerVO;
 import com.yyl.gateshield.center.domain.register.model.vo.ApplicationInterfaceMethodVO;
 import com.yyl.gateshield.center.domain.register.model.vo.ApplicationInterfaceVO;
@@ -28,6 +29,7 @@ public class ApiTest {
 
     @Autowired
     private IRegisterManageService registerManageService;
+
 
     @Test
     public void test_queryGatewayServerList() {
@@ -85,5 +87,11 @@ public class ApiTest {
         applicationInterfaceVO02.setHttpCommandType("POST");
         applicationInterfaceVO02.setAuth(1);
         registerManageService.registerApplicationInterfaceMethod(applicationInterfaceVO02);
+    }
+
+    @Test
+    public void test_queryApplicationSystemRichInfo(){
+        ApplicationSystemRichInfo applicationSystemRichInfo = configManageService.queryApplicationSystemRichInfo("api-gateway-g4");
+        logger.info(JSON.toJSONString(applicationSystemRichInfo));
     }
 }

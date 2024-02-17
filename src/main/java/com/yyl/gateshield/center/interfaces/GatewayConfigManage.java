@@ -1,6 +1,7 @@
 package com.yyl.gateshield.center.interfaces;
 
 import com.yyl.gateshield.center.application.IConfigManageService;
+import com.yyl.gateshield.center.domain.manage.model.aggregates.ApplicationSystemRichInfo;
 import com.yyl.gateshield.center.domain.manage.model.vo.GatewayServerVO;
 import com.yyl.gateshield.center.infrastructure.common.ResponseCode;
 import com.yyl.gateshield.center.infrastructure.common.Result;
@@ -58,5 +59,17 @@ public class GatewayConfigManage {
     @PostMapping(value = "distributionGateway")
     public void distributionGatewayServerNode(@RequestParam String groupId, @RequestParam String gatewayId) {
 
+    }
+
+    @PostMapping(value = "queryApplicationSystemRichInfo", produces = "application/json;charset=utf-8")
+    public Result<ApplicationSystemRichInfo> queryApplicationSystemRichInfo(@RequestParam String gatewayId) {
+        try {
+            logger.info("查询分配到网关下的待注册系统信息(系统、接口、方法) gatewayId：{}", gatewayId);
+            ApplicationSystemRichInfo applicationSystemRichInfo = configManageService.queryApplicationSystemRichInfo(gatewayId);
+            return new Result<>(ResponseCode.SUCCESS.getCode(), ResponseCode.SUCCESS.getInfo(), applicationSystemRichInfo);
+        } catch (Exception e) {
+            logger.error("查询分配到网关下的待注册系统信息(系统、接口、方法)异常 gatewayId：{}", gatewayId, e);
+            return new Result<>(ResponseCode.UN_ERROR.getCode(), e.getMessage(), null);
+        }
     }
 }

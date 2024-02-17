@@ -1,8 +1,8 @@
 package com.yyl.gateshield.center.domain.manage.service;
 
 import com.yyl.gateshield.center.application.IConfigManageService;
-import com.yyl.gateshield.center.domain.manage.model.vo.GatewayServerDetailVO;
-import com.yyl.gateshield.center.domain.manage.model.vo.GatewayServerVO;
+import com.yyl.gateshield.center.domain.manage.model.aggregates.ApplicationSystemRichInfo;
+import com.yyl.gateshield.center.domain.manage.model.vo.*;
 import com.yyl.gateshield.center.domain.manage.repository.IConfigManageRepository;
 import com.yyl.gateshield.center.infrastructure.common.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,5 +37,23 @@ public class ConfigManageServiceImpl implements IConfigManageService {
             }
         }
         return configManageRepository.updateGatewayStatus(gatewayId, gatewayAddress, Constants.GatewayStatus.Available);
+    }
+
+    @Override
+    public ApplicationSystemRichInfo queryApplicationSystemRichInfo(String gatewayId) {
+        // 1. 查询出网关ID对应的关联系统ID集合。也就是一个网关ID会被分配一些系统RPC服务注册进来，需要把这些服务查询出来。
+        List<String> systemIdList = configManageRepository.queryGatewayDistributionSystemIdList(gatewayId);
+        // 2. 查询系统ID对应的系统列表信息
+        List<ApplicationSystemVO> applicationSystemVOList = configManageRepository.queryApplicationSystemList(systemIdList);
+        // 3. 查询系统下的接口信息
+        for (ApplicationSystemVO applicationSystemVO : applicationSystemVOList) {
+            List<ApplicationInterfaceVO> applicationInterfaceVOList = configManageRepository.queryApplicationInterfaceList(applicationSystemVO.getSystemId());
+            for(ApplicationInterfaceVO applicationInterfaceVO : applicationInterfaceVOList) {
+                List<ApplicationInterfaceMethodVO> applicationInterfaceMethodVOList = configManageRepository.queryApplicationInterfaceMethodList(applicationSystemVO.getSystemId(), applicationInterfaceVO.getInterfaceId());
+                applicationInterfaceVO.setMethodList(applicationInterfaceMethodVOList);
+            }
+            applicationSystemVO.setInterfaceList(applicationInterfaceVOList);
+        }
+        return new ApplicationSystemRichInfo(gatewayId, applicationSystemVOList);
     }
 }

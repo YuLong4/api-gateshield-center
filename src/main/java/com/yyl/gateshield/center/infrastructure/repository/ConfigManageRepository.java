@@ -58,7 +58,7 @@ public class ConfigManageRepository implements IConfigManageRepository {
         req.setGatewayId(gatewayId);
         req.setGatewayAddress(gatewayAddress);
         GatewayServerDetail gatewayServerDetail = gatewayServerDetailDao.queryGatewayServerDetail(req);
-        if(gatewayAddress == null) {
+        if(gatewayServerDetail == null) {
             //未查询到
             return null;
         }

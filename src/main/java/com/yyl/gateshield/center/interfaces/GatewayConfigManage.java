@@ -40,6 +40,7 @@ public class GatewayConfigManage {
     /*
     注册网关服务节点
      */
+    @PostMapping(value = "registerGateway", produces = "application/json;charset=utf-8")
     public Result<Boolean> registerGatewayServerNode(@RequestParam String groupId, @RequestParam String gatewayId, @RequestParam String gatewayName, @RequestParam String gatewayAddress) {
         try {
             logger.info("注册网关服务节点 gatewayId：{} gatewayName：{} gatewayAddress：{}", gatewayId, gatewayName, gatewayAddress);

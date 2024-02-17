@@ -1,8 +1,7 @@
 package com.yyl.gateshield.center.test;
 
 import com.alibaba.fastjson.JSON;
-import com.yyl.gateshield.center.application.IApiService;
-import com.yyl.gateshield.center.domain.model.ApiData;
+import com.yyl.gateshield.center.application.IConfigManageService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -16,16 +15,5 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ServiceTest {
-
-    private Logger logger = LoggerFactory.getLogger(ServiceTest.class);
-
-    @Autowired
-    private IApiService apiService;
-
-    @Test
-    public void test(){
-        List<ApiData> apiDataList = apiService.queryHttpStatementList();
-        logger.info(JSON.toJSONString(apiDataList));
-    }
 
 }

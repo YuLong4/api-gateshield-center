@@ -91,7 +91,7 @@ public class ApiTest {
 
     @Test
     public void test_queryApplicationSystemRichInfo(){
-        ApplicationSystemRichInfo applicationSystemRichInfo = configManageService.queryApplicationSystemRichInfo("api-gateway-g4");
+        ApplicationSystemRichInfo applicationSystemRichInfo = configManageService.queryApplicationSystemRichInfo("api-gateway-g1");
         logger.info(JSON.toJSONString(applicationSystemRichInfo));
     }
 }

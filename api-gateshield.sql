@@ -37,6 +37,7 @@ CREATE TABLE `application_interface` (
 -- Records of application_interface
 -- ----------------------------
 BEGIN;
+INSERT INTO `application_interface` VALUES (1, 'api-gateshield-test', 'com.yyl.gateshield.rpc.IActivityBooth', 'sayHi', '1.0.0', '2022-11-13 13:13:00', '2022-11-13 13:13:00');
 COMMIT;
 
 -- ----------------------------
@@ -63,6 +64,8 @@ CREATE TABLE `application_interface_method` (
 -- Records of application_interface_method
 -- ----------------------------
 BEGIN;
+INSERT INTO `application_interface_method` VALUES (1, 'api-gateshield-test', 'com.yyl.gateshield.rpc.IActivityBooth', 'sayHi', '测试方法', 'java.lang.String', '/wg/activity/sayHi', 'GET', 0, '2022-11-13 13:16:52', '2022-11-13 13:16:52');
+INSERT INTO `application_interface_method` VALUES (2, 'api-gateshield-test', 'com.yyl.gateshield.rpc.IActivityBooth', 'insert', '插入方法', 'com.yyl.gateshield.rpc.dto.XReq', '/wg/activity/insert', 'POST', 1, '2022-11-13 13:16:52', '2022-11-13 13:16:52');
 COMMIT;
 
 -- ----------------------------
@@ -85,6 +88,8 @@ CREATE TABLE `application_system` (
 -- Records of application_system
 -- ----------------------------
 BEGIN;
+INSERT INTO `application_system` VALUES (1, 'lottery-api', '抽奖API系统', 'RPC', '127.0.0.1', '2022-11-13 13:10:03', '2022-11-13 13:10:03');
+INSERT INTO `application_system` VALUES (3, 'api-gateshield-test', '网关测试系统', 'RPC', '127.0.0.1', '2022-11-13 13:12:54', '2022-11-13 13:12:54');
 COMMIT;
 
 -- ----------------------------
@@ -106,6 +111,7 @@ CREATE TABLE `gateway_distribution` (
 -- Records of gateway_distribution
 -- ----------------------------
 BEGIN;
+INSERT INTO `gateway_distribution` VALUES (1, '10001', 'api-gateway-g1', 'api-gateshield-test', '网关测试系统', '2023-04-10 15:32:56', '2023-04-10 15:32:58');
 COMMIT;
 
 -- ----------------------------

@@ -88,8 +88,8 @@ CREATE TABLE `application_system` (
 -- Records of application_system
 -- ----------------------------
 BEGIN;
-INSERT INTO `application_system` VALUES (1, 'lottery-api', '抽奖API系统', 'RPC', '127.0.0.1', '2022-11-13 13:10:03', '2022-11-13 13:10:03');
-INSERT INTO `application_system` VALUES (3, 'api-gateshield-test', '网关测试系统', 'RPC', '127.0.0.1', '2022-11-13 13:12:54', '2022-11-13 13:12:54');
+INSERT INTO `application_system` VALUES (1, 'lottery-api', '抽奖API系统', 'RPC', 'zookeeper://127.0.0.1:2181', '2022-11-13 13:10:03', '2022-11-13 13:10:03');
+INSERT INTO `application_system` VALUES (3, 'api-gateshield-test', '网关测试系统', 'RPC', 'zookeeper://127.0.0.1:2181', '2022-11-13 13:12:54', '2022-11-13 13:12:54');
 COMMIT;
 
 -- ----------------------------
@@ -111,7 +111,7 @@ CREATE TABLE `gateway_distribution` (
 -- Records of gateway_distribution
 -- ----------------------------
 BEGIN;
-INSERT INTO `gateway_distribution` VALUES (1, '10001', 'api-gateway-g1', 'api-gateshield-test', '网关测试系统', '2023-04-10 15:32:56', '2023-04-10 15:32:58');
+INSERT INTO `gateway_distribution` VALUES (1, '10001', 'api-gateway-g4', 'api-gateshield-test', '网关测试系统', '2023-04-10 15:32:56', '2023-04-10 15:32:58');
 COMMIT;
 
 -- ----------------------------
@@ -156,6 +156,7 @@ BEGIN;
 INSERT INTO `gateway_server_detail` VALUES (10, '10001', 'api-gateway-g1', '电商支付网关', '127.0.0.196', '1', '2022-11-06 12:57:55', '2022-11-06 12:57:55');
 INSERT INTO `gateway_server_detail` VALUES (11, '10001', 'api-gateway-g2', '电商支付网关', '127.0.0.197', '1', '2022-11-06 11:37:01', '2022-11-06 11:37:01');
 INSERT INTO `gateway_server_detail` VALUES (12, '10001', 'api-gateway-g3', '电商配送网关', '127.0.0.198', '1', '2022-11-06 11:37:01', '2022-11-06 11:37:01');
+INSERT INTO `gateway_server_detail` VALUES (16, '10001', 'api-gateway-g4', '电商配送网关', '127.0.0.1:7397', '1', '2022-12-03 15:36:19', '2022-12-03 15:36:19');
 COMMIT;
 
 -- ----------------------------

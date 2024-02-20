@@ -88,8 +88,8 @@ CREATE TABLE `application_system` (
 -- Records of application_system
 -- ----------------------------
 BEGIN;
-INSERT INTO `application_system` VALUES (1, 'lottery-api', '抽奖API系统', 'RPC', 'zookeeper://127.0.0.1:2181', '2022-11-13 13:10:03', '2022-11-13 13:10:03');
-INSERT INTO `application_system` VALUES (3, 'api-gateshield-test', '网关测试系统', 'RPC', 'zookeeper://127.0.0.1:2181', '2022-11-13 13:12:54', '2022-11-13 13:12:54');
+INSERT INTO `application_system` VALUES (1, 'lottery-api', '抽奖API系统', 'RPC', 'zookeeper://192.168.31.68:2181', '2022-11-13 13:10:03', '2022-11-13 13:10:03');
+INSERT INTO `application_system` VALUES (3, 'api-gateshield-test', '网关测试系统', 'RPC', 'zookeeper://192.168.31.68:2181', '2022-11-13 13:12:54', '2022-11-13 13:12:54');
 COMMIT;
 
 -- ----------------------------

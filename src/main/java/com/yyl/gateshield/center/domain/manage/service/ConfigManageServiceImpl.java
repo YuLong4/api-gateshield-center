@@ -65,4 +65,9 @@ public class ConfigManageServiceImpl implements IConfigManageService {
         }
         return new ApplicationSystemRichInfo(gatewayId, applicationSystemVOList);
     }
+
+    @Override
+    public String queryGatewayDistribution(String systemId) {
+        return configManageRepository.queryGatewayDistribution(systemId);
+    }
 }

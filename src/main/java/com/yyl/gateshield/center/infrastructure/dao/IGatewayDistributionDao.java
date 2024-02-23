@@ -9,4 +9,5 @@ public interface IGatewayDistributionDao {
 
     List<String> queryGatewayDistributionSystemIdList();
 
+    String queryGatewayDistribution(String systemId);
 }

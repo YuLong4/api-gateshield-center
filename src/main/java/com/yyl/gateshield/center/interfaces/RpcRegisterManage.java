@@ -1,5 +1,6 @@
 package com.yyl.gateshield.center.interfaces;
 
+import com.yyl.gateshield.center.application.IConfigManageService;
 import com.yyl.gateshield.center.application.IRegisterManageService;
 import com.yyl.gateshield.center.domain.register.model.vo.ApplicationInterfaceMethodVO;
 import com.yyl.gateshield.center.domain.register.model.vo.ApplicationInterfaceVO;
@@ -23,6 +24,10 @@ public class RpcRegisterManage {
 
     @Autowired
     private IRegisterManageService registerManageService;
+
+    @Autowired
+    private IConfigManageService configManageService;
+
 
     @PostMapping(value = "registerApplication", produces = "application/json;charset=utf-8")
     public Result<Boolean> registerApplication(@RequestParam String systemId,
@@ -75,7 +80,7 @@ public class RpcRegisterManage {
                                                               @RequestParam String interfaceId,
                                                               @RequestParam String methodId,
                                                               @RequestParam String methodName,
-                                                              @RequestParam String parameter_type,
+                                                              @RequestParam String parameterType,
                                                               @RequestParam String uri,
                                                               @RequestParam String httpCommandType,
                                                               @RequestParam Integer auth) {
@@ -86,7 +91,7 @@ public class RpcRegisterManage {
             applicationInterfaceVO.setInterfaceId(interfaceId);
             applicationInterfaceVO.setMethodId(methodId);
             applicationInterfaceVO.setMethodName(methodName);
-            applicationInterfaceVO.setParameterType(parameter_type);
+            applicationInterfaceVO.setParameterType(parameterType);
             applicationInterfaceVO.setUri(uri);
             applicationInterfaceVO.setHttpCommandType(httpCommandType);
             applicationInterfaceVO.setAuth(auth);
@@ -97,6 +102,20 @@ public class RpcRegisterManage {
             return new Result<>(ResponseCode.INDEX_DUP.getCode(), e.getMessage(), true);
         } catch (Exception e) {
             logger.error("注册应用接口失败 systemId：{}", systemId, e);
+            return new Result<>(ResponseCode.UN_ERROR.getCode(), e.getMessage(), false);
+        }
+    }
+
+    @PostMapping(value = "registerEvent", produces = "application/json;charset=utf-8")
+    public Result<Boolean> registerEvent(@RequestParam String systemId) {
+        try {
+            logger.info("应用信息注册完成通知 systemId：{}", systemId);
+            // 推送注册消息
+            String gatewayId = configManageService.queryGatewayDistribution(systemId);
+//            messageService.pushMessage(gatewayId, systemId);
+            return new Result<>(ResponseCode.SUCCESS.getCode(), ResponseCode.SUCCESS.getInfo(), true);
+        } catch (Exception e) {
+            logger.error("应用信息注册完成通知失败 systemId：{}", systemId, e);
             return new Result<>(ResponseCode.UN_ERROR.getCode(), e.getMessage(), false);
         }
     }

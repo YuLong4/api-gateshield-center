@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,13 +45,15 @@ public class ConfigManageServiceImpl implements IConfigManageService {
     }
 
     @Override
-    public ApplicationSystemRichInfo queryApplicationSystemRichInfo(String gatewayId) {
+    public ApplicationSystemRichInfo queryApplicationSystemRichInfo(String gatewayId, String systemId) {
         // 1. 查询出网关ID对应的关联系统ID集合。也就是一个网关ID会被分配一些系统RPC服务注册进来，需要把这些服务查询出来。
-        List<String> systemIdList = configManageRepository.queryGatewayDistributionSystemIdList(gatewayId);
-        if (systemIdList.isEmpty()) {
-            //判空，不然sql语句会报错
-            logger.warn("网关ID:{} 对应的关联系统集合systemIdList 为空", gatewayId);
-            return null;
+        List<String> systemIdList = new ArrayList<>();
+        if(systemId == null) {
+            //没指定systemId就去查数据库
+            systemIdList = configManageRepository.queryGatewayDistributionSystemIdList(gatewayId);
+        } else {
+            //指定了systemId就直接添加
+            systemIdList.add(systemId);
         }
         // 2. 查询系统ID对应的系统列表信息
         List<ApplicationSystemVO> applicationSystemVOList = configManageRepository.queryApplicationSystemList(systemIdList);

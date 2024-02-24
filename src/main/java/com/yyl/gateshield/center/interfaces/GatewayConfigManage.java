@@ -81,7 +81,7 @@ public class GatewayConfigManage {
     @PostMapping(value = "queryRedisConfig", produces = "application/json;charset=utf-8")
     public Result<Map<String, String>> queryRedisConfig(){
         try {
-            logger.info("查询配置中心Reids配置信息");
+            logger.info("查询配置中心Redis配置信息");
             Map<String, String> redisConfig = messageService.queryRedisConfig();
             return new Result<>(ResponseCode.SUCCESS.getCode(), ResponseCode.SUCCESS.getInfo(), redisConfig);
         } catch (Exception e) {

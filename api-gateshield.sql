@@ -111,7 +111,7 @@ CREATE TABLE `gateway_distribution` (
 -- Records of gateway_distribution
 -- ----------------------------
 BEGIN;
-INSERT INTO `gateway_distribution` VALUES (1, '10001', 'api-gateway-g4', 'api-gateshield-test', '网关测试系统', '2023-04-10 15:32:56', '2023-04-10 15:32:58');
+INSERT INTO `gateway_distribution` VALUES (1, '10001', 'api-gateway-g4', 'api-gateshield-test-provider', '网关测试系统', '2023-04-10 15:32:56', '2023-04-10 15:32:58');
 COMMIT;
 
 -- ----------------------------

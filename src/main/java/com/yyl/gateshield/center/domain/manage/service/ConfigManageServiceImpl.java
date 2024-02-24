@@ -1,5 +1,6 @@
 package com.yyl.gateshield.center.domain.manage.service;
 
+import com.alibaba.fastjson.JSON;
 import com.yyl.gateshield.center.application.IConfigManageService;
 import com.yyl.gateshield.center.domain.manage.model.aggregates.ApplicationSystemRichInfo;
 import com.yyl.gateshield.center.domain.manage.model.vo.*;
@@ -48,13 +49,17 @@ public class ConfigManageServiceImpl implements IConfigManageService {
     public ApplicationSystemRichInfo queryApplicationSystemRichInfo(String gatewayId, String systemId) {
         // 1. 查询出网关ID对应的关联系统ID集合。也就是一个网关ID会被分配一些系统RPC服务注册进来，需要把这些服务查询出来。
         List<String> systemIdList = new ArrayList<>();
-        if(systemId == null) {
+        logger.info("systemId: " + systemId);
+        if(systemId == null || systemId.equals("")) {
             //没指定systemId就去查数据库
+            logger.info("没指定systemId就去查数据库");
             systemIdList = configManageRepository.queryGatewayDistributionSystemIdList(gatewayId);
         } else {
             //指定了systemId就直接添加
+            logger.info("指定了systemId就直接添加");
             systemIdList.add(systemId);
         }
+        logger.info("systemIdList: " + JSON.toJSONString(systemIdList));
         // 2. 查询系统ID对应的系统列表信息
         List<ApplicationSystemVO> applicationSystemVOList = configManageRepository.queryApplicationSystemList(systemIdList);
         // 3. 查询系统下的接口信息

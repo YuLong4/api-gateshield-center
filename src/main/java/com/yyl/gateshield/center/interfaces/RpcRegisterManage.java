@@ -1,6 +1,7 @@
 package com.yyl.gateshield.center.interfaces;
 
 import com.yyl.gateshield.center.application.IConfigManageService;
+import com.yyl.gateshield.center.application.IMessageService;
 import com.yyl.gateshield.center.application.IRegisterManageService;
 import com.yyl.gateshield.center.domain.register.model.vo.ApplicationInterfaceMethodVO;
 import com.yyl.gateshield.center.domain.register.model.vo.ApplicationInterfaceVO;
@@ -27,6 +28,9 @@ public class RpcRegisterManage {
 
     @Autowired
     private IConfigManageService configManageService;
+
+    @Autowired
+    private IMessageService messageService;
 
 
     @PostMapping(value = "registerApplication", produces = "application/json;charset=utf-8")
@@ -112,7 +116,7 @@ public class RpcRegisterManage {
             logger.info("应用信息注册完成通知 systemId：{}", systemId);
             // 推送注册消息
             String gatewayId = configManageService.queryGatewayDistribution(systemId);
-//            messageService.pushMessage(gatewayId, systemId);
+            messageService.pushMessage(gatewayId, systemId);
             return new Result<>(ResponseCode.SUCCESS.getCode(), ResponseCode.SUCCESS.getInfo(), true);
         } catch (Exception e) {
             logger.error("应用信息注册完成通知失败 systemId：{}", systemId, e);

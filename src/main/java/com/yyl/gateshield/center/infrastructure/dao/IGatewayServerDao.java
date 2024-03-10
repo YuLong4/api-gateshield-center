@@ -1,5 +1,6 @@
 package com.yyl.gateshield.center.infrastructure.dao;
 
+import com.yyl.gateshield.center.infrastructure.common.OperationRequest;
 import com.yyl.gateshield.center.infrastructure.po.GatewayServer;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -9,5 +10,9 @@ import java.util.List;
 public interface IGatewayServerDao {
 
     List<GatewayServer> queryGatewayServerList();
+
+    List<GatewayServer> queryGatewayServerListByPage(OperationRequest<String> request);
+
+    int queryGatewayServerListCountByPage(OperationRequest<String> request);
 
 }
